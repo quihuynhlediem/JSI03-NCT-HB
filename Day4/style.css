@@ -43,7 +43,7 @@ body {
   color: #007bff;
 }
 
-#location,
+#location_show,
 #temperature {
   margin-top: 10px;
   font-size: 24px;
