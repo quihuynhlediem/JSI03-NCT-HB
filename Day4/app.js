@@ -7,7 +7,7 @@ fetch("https://geocoding-api.open-meteo.com/v1/search?name=Hanoi")
     return response.json();
   })
   .then(function (data) {
-    //console.log(data);
+    console.log(data);
     locationShow.innerHTML = data.results[0].name;
     let templink = `https://api.open-meteo.com/v1/forecast?latitude=${data.results[1].latitude}&longitude=${data.results[1].longitude}&current_weather=true`;
     fetch(templink)
@@ -15,7 +15,7 @@ fetch("https://geocoding-api.open-meteo.com/v1/search?name=Hanoi")
         return response.json();
       })
       .then(function (data) {
-        //console.log(data);
+        console.log(data);
         temperature.innerHTML = data.current_weather.temperature + '°C';
       })
   });
