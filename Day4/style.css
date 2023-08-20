@@ -26,16 +26,22 @@ body {
 }
 
 /* Style the input */
-.place_input {
-  width: 100%;
+#place_input {
+  width: 60%;
   padding: 12px;
-  margin: 15px 0;
+  margin: auto;
   border: 1px solid #cccccc;
   border-radius: 8px;
-  font-size: 18px;
+  font-size: 16px;
   color: #555555;
 }
 
+#place_input_btn {
+  padding: 8px;
+  margin: auto;
+  border-radius: 8px;
+  font-size: 16px;
+}
 /* Style the weather, location, and temperature sections */
 #weather {
   margin-top: 20px;
