@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Sample CRUD Firebase Javascript - 01 Read Data</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <h1>
+    Firebase CRUD with Vanilla Javascript
+    <br />
+    <small>
+      <em>01 Read Data</em>
+    </small>
+  </h1>
+  <ul id="userList"></ul>
+  <div id="userDetail">
+    <p>
+      Name :
+      <strong class="detailName"></strong>
+    </p>
+    <p>
+      Age:
+      <strong class="detailAge"></strong>
+    </p>
+    <p>
+      Email:
+      <strong class="detailEmail"></strong>
+    </p>
+  </div>
+
+  <!-- firebase sdk link goes here -->
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDi1n9LUzy_VA5-Cf456Dh0-vW2dZonu3I",
+      authDomain: "jsi03-3b2ce.firebaseapp.com",
+      projectId: "jsi03-3b2ce",
+      storageBucket: "jsi03-3b2ce.appspot.com",
+      messagingSenderId: "956976919659",
+      appId: "1:956976919659:web:d30befd93178e93fceed2e"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  </script>
+  <!-- firebase sdk link ends -->
+  <script type="text/javascript" src="app.js"></script>
+</body>
+
+</html>
