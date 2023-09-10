@@ -31,28 +31,52 @@
     </p>
   </div>
 
-  <!-- firebase sdk link goes here -->
   <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+        import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
+
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
     // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     const firebaseConfig = {
-      apiKey: "AIzaSyDi1n9LUzy_VA5-Cf456Dh0-vW2dZonu3I",
-      authDomain: "jsi03-3b2ce.firebaseapp.com",
-      projectId: "jsi03-3b2ce",
-      storageBucket: "jsi03-3b2ce.appspot.com",
-      messagingSenderId: "956976919659",
-      appId: "1:956976919659:web:d30befd93178e93fceed2e"
+      apiKey: "AIzaSyC0i59DC02EOl972GDt-xhtAypbPnFX0XY",
+      authDomain: "jsi03-59bf0.firebaseapp.com",
+      databaseURL: "https://jsi03-59bf0-default-rtdb.firebaseio.com",
+      projectId: "jsi03-59bf0",
+      storageBucket: "jsi03-59bf0.appspot.com",
+      messagingSenderId: "641607578160",
+      appId: "1:641607578160:web:ff69a6fbf2157cbc0173f5",
+      measurementId: "G-6TNZ1JB05C"
     };
 
     // Initialize Firebase
     const app = initializeApp(firebaseConfig);
-  </script>
-  <!-- firebase sdk link ends -->
-  <script type="text/javascript" src="app.js"></script>
+        const database = getDatabase(app);
+
+        const dbRef = ref(getDatabase(app));
+        //const userId = "One";
+        get(ref(database, `users/0`)).then((snapshot) => {
+          if (snapshot.exists()) {
+            console.log(snapshot.val());
+          } else {
+            console.log("No data available");
+          }
+        }).catch((error) => {
+          console.error(error);
+        });
+
+
+        function writeUserData(userID, name, age) {
+          set(ref(database, `users/${userID}`), {
+            name: name,
+            age: age
+          })
+        }
+        writeUserData("1", "Linh", 17)
+</script>
 </body>
 
 </html>
