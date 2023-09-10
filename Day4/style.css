@@ -17,12 +17,18 @@ body {
 }
 
 /* Style the main container */
-.main_container {
+.outside_container {
   background-color: #ffffff;
   border-radius: 20px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  padding: 30px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+}
+.main_container {
+  padding: 20px;
+  text-align: center;
+  align-items: center;
 }
 
 /* Style the input */
