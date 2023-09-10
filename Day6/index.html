@@ -112,11 +112,9 @@
 
           alert("User login success");
           localStorage.setItem("email", email);
-          setTimeout(function(){
-          window.open("personal-page.html", "_self");
+          setTimeout(function () {
+            window.open("personal-page.html", "_self");
           }, 1000);
-
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
