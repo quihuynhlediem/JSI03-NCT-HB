@@ -1,81 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>CRUD with Firebase</title>
-		<link rel="stylesheet" href="style.css" />
-	</head>
 
-	<body>
-		<div class="container">
-			<h2>CRUD with Firebase</h2>
-			<hr />
-			<br />
-			<div class="form">
-				RollNo: <input type="text" name="RollNo" id="roll" /> <br /><br />
-				Name:&nbsp; <input type="text" name="name" id="name" /> <br /><br />
-				Gender: <input type="text" name="gender" id="gender" /> <br /><br />
-				Address: <input type="text" name="Address" id="address" /> <br /><br />
-			</div>
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>CRUD with Firebase</title>
+	<link rel="stylesheet" href="style.css" />
+</head>
 
-			<div class="buttons">
-				<button id="create">Create</button>
-				<button id="read">Read</button>
-				<button id="update">Update</button>
-				<button id="delete">Delete</button>
-			</div>
+<body>
+	<div class="container">
+		<h2>CRUD with Firebase</h2>
+		<hr />
+		<br />
+		<div class="form">
+			RollNo: <input type="text" name="RollNo" id="roll" /> <br /><br />
+			Name:&nbsp; <input type="text" name="name" id="name" /> <br /><br />
+			Gender: <input type="text" name="gender" id="gender" /> <br /><br />
+			Address: <input type="text" name="Address" id="address" /> <br /><br />
 		</div>
 
-		<script type="module">
-			import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
-			import {
-				getDatabase,
-				ref,
-				set,
-				get,
-				child,
-			} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
+		<div class="buttons">
+			<button id="create">Create</button>
+			<button id="read">Read</button>
+			<button id="update">Update</button>
+			<button id="delete">Delete</button>
+		</div>
+	</div>
 
-			const firebaseConfig = {
-				apiKey: "AIzaSyC4lxHH8YG0nfxndpup7IVzIdA-x-6090Y",
-				authDomain: "jsi03-myfirstproject.firebaseapp.com",
-				projectId: "jsi03-myfirstproject",
-				storageBucket: "jsi03-myfirstproject.appspot.com",
-				messagingSenderId: "633830080267",
-				appId: "1:633830080267:web:36fc363a46947f9c51ec0e",
-				measurementId: "G-0E2QMWM8QV",
-			};
+	<script type="module">
+		import { initializeApp } from "https://www.gstatic.com/firebasejs/10.3.1/firebase-app.js";
+		import {
+			getDatabase,
+			ref,
+			set,
+			get,
+			child,
+			onValue,
+			update, 
+			remove
+		} from "https://www.gstatic.com/firebasejs/10.3.1/firebase-database.js";
 
-			// Initialize Firebase
-			const app = initializeApp(firebaseConfig);
-			const database = getDatabase(app);
-			var rollV, nameV, genderV, addressV;
+		const firebaseConfig = {
+			apiKey: "AIzaSyC4lxHH8YG0nfxndpup7IVzIdA-x-6090Y",
+			authDomain: "jsi03-myfirstproject.firebaseapp.com",
+			projectId: "jsi03-myfirstproject",
+			storageBucket: "jsi03-myfirstproject.appspot.com",
+			messagingSenderId: "633830080267",
+			appId: "1:633830080267:web:36fc363a46947f9c51ec0e",
+			measurementId: "G-0E2QMWM8QV",
+		};
 
-			function readFom() {
-				rollV = document.getElementById("roll").value;
-				nameV = document.getElementById("name").value;
-				genderV = document.getElementById("gender").value;
-				addressV = document.getElementById("address").value;
-				console.log(rollV, nameV, addressV, genderV);
-			}
+		// Initialize Firebase
+		const app = initializeApp(firebaseConfig);
+		const database = getDatabase(app);
+		var rollV, nameV, genderV, addressV;
 
-			let createBtn = document.getElementById("create");
-			let readBtn = document.getElementById("read");
-			let updateBtn = document.getElementById("update");
-			let deleteBtn = document.getElementById("delete");
+		function readFom() {
+			rollV = document.getElementById("roll").value;
+			nameV = document.getElementById("name").value;
+			genderV = document.getElementById("gender").value;
+			addressV = document.getElementById("address").value;
+		}
 
-			createBtn.addEventListener("click", function () {
-				readFom();
-				set(ref(database, "students/" + rollV), {
-					student_roll: rollV,
-					student_name: nameV,
-					student_gender: genderV,
-					student_address: addressV,
-				});
+		let createBtn = document.getElementById("create");
+		let readBtn = document.getElementById("read");
+		let updateBtn = document.getElementById("update");
+		let removeBtn = document.getElementById("delete");
+		let array;
+
+		function checkExist(rollV){
+			onValue(ref(database, `students/${rollV}`), function(snapshot){
+				array = Object.getOwnPropertyNames(snapshot.val());
 			});
-		</script>
-		<!-- <script type="module" src="app.js"></script> -->
-	</body>
+			return array;
+		};
+
+		createBtn.addEventListener("click", function () {
+			readFom();
+			set(ref(database, "students/" + rollV), {
+				student_roll: rollV,
+				student_name: nameV,
+				student_gender: genderV,
+				student_address: addressV,
+			});
+
+			alert("Create Successfully!");
+			document.getElementById("roll").value = "";
+			document.getElementById("name").value = "";
+			document.getElementById("gender").value = "";
+			document.getElementById("address").value = "";
+		});
+
+		readBtn.addEventListener("click", function () {
+			readFom();
+			onValue(ref(database, `students/${rollV}`), function(snapshot){
+				console.log("Student Name: " + snapshot.val().student_name);
+			});
+
+			alert("Read Successfully!");
+			document.getElementById("roll").value = "";
+			document.getElementById("name").value = "";
+			document.getElementById("gender").value = "";
+			document.getElementById("address").value = "";
+		 });
+
+		updateBtn.addEventListener("click", function () {
+			readFom()
+			update(ref(database, `students/${rollV}`), {
+				student_name: nameV,
+				student_gender: genderV,
+				student_address: addressV,
+			});
+
+			alert("Update Successfully!");
+			document.getElementById("roll").value = "";
+			document.getElementById("name").value = "";
+			document.getElementById("gender").value = "";
+			document.getElementById("address").value = "";
+		});
+
+		removeBtn.addEventListener("click", function () {
+			readFom()
+			remove(ref(database, `students/${rollV}`));
+
+			alert("Delete Successfully!");
+			document.getElementById("roll").value = "";
+			document.getElementById("name").value = "";
+			document.getElementById("gender").value = "";
+			document.getElementById("address").value = "";
+		});
+	</script>
+	<!-- <script type="module" src="app.js"></script> -->
+</body>
+
 </html>
