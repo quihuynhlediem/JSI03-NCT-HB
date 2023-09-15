@@ -4,6 +4,8 @@
 	box-sizing: border-box;
 }
 
+/* Login CSS Start */
+
 .container {
 	display: flex;
 	margin: 70px auto;
@@ -31,3 +33,54 @@
 	border: 2px solid black;
 	padding: 10px;
 }
+
+/* Login CSS End */
+
+
+/* Logout CSS Start */
+.dropdown {
+	float: left;
+	overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: red;
+}
+
+.sublink_container {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.sublink_container div {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.sublink_container div:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .sublink_container {
+  display: block;
+}
+/* Logout CSS End */

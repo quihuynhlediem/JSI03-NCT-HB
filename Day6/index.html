@@ -105,16 +105,11 @@
             localStorage.setItem("username", snapshot.val().username);
           });
 
-          // get(ref(database, `users/${user.uid}`))
-          // .then(function (snapshot) {
-          //   localStorage.setItem("username", snapshot.val().username);
-          // });
-
           alert("User login success");
           localStorage.setItem("email", email);
           setTimeout(function () {
             window.open("personal-page.html", "_self");
-          }, 1000);
+          }, 2000);
         })
         .catch((error) => {
           const errorCode = error.code;
