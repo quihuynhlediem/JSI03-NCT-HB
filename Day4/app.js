@@ -13,7 +13,7 @@ placeSearchBtn.addEventListener('click', function () {
   .then(function (data) {
     //console.log(data);
     locationShow.innerHTML = data.results[0].name;
-    let templink = `https://api.open-meteo.com/v1/forecast?latitude=${data.results[1].latitude}&longitude=${data.results[1].longitude}&current_weather=true`;
+    let templink = `https://api.open-meteo.com/v1/forecast?latitude=${data.results[0].latitude}&longitude=${data.results[0].longitude}&current_weather=true`;
     fetch(templink)
       .then(function (response) {
         return response.json();
